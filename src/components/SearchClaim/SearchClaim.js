@@ -1,4 +1,4 @@
-import { getTestData } from "../../data/DataFunctions";
+import { getTestData, getAllClaimsAxiosVersion } from "../../data/DataFunctions";
 //import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, useEffect, useState } from "react";
 import ClaimRow from "./ClaimRow";
@@ -23,7 +23,8 @@ const SearchClaim = (props) => {
         //     setClaims(claimsInRedux);
         //     console.log("got the claims from redux");
         // }
-        const claimsPromise = getTestData();
+        const claimsPromise = getAllClaimsAxiosVersion();
+        //getTestData();
         console.log("getting the claims from redux");
         claimsPromise.then (
             (response) => {
