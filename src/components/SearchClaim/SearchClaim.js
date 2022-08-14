@@ -2,9 +2,48 @@ import { getTestData, getAllClaimsAxiosVersion } from "../../data/DataFunctions"
 //import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, useEffect, useState } from "react";
 import ClaimRow from "./ClaimRow";
+import ReactTable from "react-table-6";
+import 'react-table-6/react-table.css'
 
 const SearchClaim = (props) => {
     const [claims, setClaims] = useState([]);
+
+    const claimTableColumns = [{
+        Header: "Policy Number",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "policyNumber",
+        filterable: true
+    },{
+        Header: "Insurance Type",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "insuranceType",
+        filterable: true
+    },{
+        Header: "Customer Name",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "customerName",
+        filterable: true
+    },{
+        Header: "Started Date",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "startedDate",
+        filterable: true
+    },{
+        Header: "Amount",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "amount",
+        filterable: true
+    },{
+        Header: "Reason",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "reason",
+        filterable: true
+    },{
+        Header: "Description",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "description",
+        filterable: true
+    }]
 
     // const dispatch = useDispatch();
     // const claimsInRedux = useSelector(state => state.claims);
@@ -55,18 +94,17 @@ const SearchClaim = (props) => {
             customerName={claims.customerName} startedDate={claims.startedDate} amount={claims.amount} reason={claims.reason} description={claims.description} />
       );
 
-    return <Fragment>
-                <table id="claimsTable" style= {{background: "#ccc"}} className="claimsTable">
-            <thead>
-            <tr><th>Policy Number</th><th>Insurance Type</th><th>Customer Name</th><th>Started Date</th><th>Amount</th><th>Reason</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-            {displayClaims}
-            </tbody>
-        </table>
-
-        {claims.length === 0 && <p>Please wait... loading data</p>}
-    </Fragment>
+    return <div>
+            <ReactTable
+            data = {claims}
+            columns = {claimTableColumns}
+            defaultPageSize = {3}
+            noDataText = {"No Claim found"}
+            striped
+            highlight
+        />
+        {/* {claims.length === 0 && <p>Please wait... loading data</p>} */}
+    </div>
 }
 
 export default SearchClaim;
