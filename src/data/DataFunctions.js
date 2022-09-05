@@ -21,3 +21,10 @@ export const getTestData= () => {
         {policyNumber: 102, insuranceType: "Pet", customerName: "Bob", startedDate: "2022-02-15", amount: 278, reason: "reason", description: "desc"}
     ]})
 }
+
+export const getClaim = (claimId) => {
+    return axios(
+        {url : `http://localhost:8080/api/claim/${claimId}`,
+        method: "GET",
+        headers : {'Accept': 'application/json'}} )
+}

@@ -1,5 +1,7 @@
 import { useReducer, useState } from "react";
 import { addNewClaim } from "../../data/DataFunctions";
+import ClaimForm from "../Forms/ClaimForm";
+import LoginForm from "../Forms/LoginForm";
 
 const NewClaim = () => {
 
@@ -31,7 +33,7 @@ const NewClaim = () => {
     const submitForm = (e) => {
         e.preventDefault();
         setSaving(true);
-        setMessage("please wait - saving")
+        setMessage("please wait saving")
         const response = addNewClaim(newClaim);
         response.then(result => {
             if (result.status === 200) {
@@ -51,31 +53,31 @@ const NewClaim = () => {
 
     return (
         <form className="newClaimForm" onSubmit={submitForm} >
-            <h2 data-testid="h2">New Claim</h2>
-            <label htmlFor="policyNumber">Policy Number</label>
-            <input type="text" id="policyNumber" onChange={handleChange} value={policyNumber} />
-            <br />
-            <label htmlFor="insuranceType">Insurance Type</label>
-            <input type="text" id="insuranceType" onChange={handleChange} value={insuranceType} />
-            <br />
-            <label htmlFor="customerName">Customer Name</label>
-            <input type="text" id="customerName" onChange={handleChange} value={customerName} />
-            <br />
-            <label htmlFor="startedDate">Date Started</label>
-            <input type="date" id="startedDate" onChange={handleChange} value={startedDate} />
-            <br />
-            <label htmlFor="amount">Amount</label>
-            <input type="text" id="amount" onChange={handleChange} value={amount} />
-            <br />
-            <label htmlFor="reason">Reason</label>
-            <input type="text" id="reason" onChange={handleChange} value={reason} />
-            <br />
-            <label htmlFor="description">Description</label>
-            <input type="text" id="description" onChange={handleChange} value={description} />
-            <br />
-            <button disabled={saving} type="submit">Submit Claim</button>
-            <p>{message}</p>
-        </form>
+           <h2 data-testid="h2">New Claim</h2>
+           <label htmlFor="policyNumber">Policy Number</label>
+           <input type="text" id="policyNumber" onChange={handleChange} value={policyNumber} />
+           <br />
+           <label htmlFor="insuranceType">Insurance Type</label>
+           <input type="text" id="insuranceType" onChange={handleChange} value={insuranceType} />
+           <br />
+           <label htmlFor="customerName">Customer Name</label>
+           <input type="text" id="customerName" onChange={handleChange} value={customerName} />
+           <br />
+           <label htmlFor="startedDate">Date Started</label>
+           <input type="date" id="startedDate" onChange={handleChange} value={startedDate} />
+           <br />
+           <label htmlFor="amount">Amount</label>
+           <input type="text" id="amount" onChange={handleChange} value={amount} />
+           <br />
+           <label htmlFor="reason">Reason</label>
+           <input type="text" id="reason" onChange={handleChange} value={reason} />
+           <br />
+           <label htmlFor="description">Description</label>
+           <input type="text" id="description" onChange={handleChange} value={description} />
+           <br />
+           <button disabled={saving} type="submit">Submit Claim</button>
+           <p>{message}</p>
+       </form>
     );
 }
 

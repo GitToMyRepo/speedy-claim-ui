@@ -1,6 +1,17 @@
+import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router';
+
 const ClaimRow = (props) => {
-    
-    return <tr id={props.cliamId} ><td>{props.policyNumber}</td><td>{props.insuranceType}</td><td>{props.customerName}</td><td>{props.startedDate}</td>
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/view/${props.id}`);
+    }
+
+    return <tr id={props.cliamId} ><td>
+        <button onClick={handleClick}>{props.claimId}</button>
+        <Link to={`/view/${props.claimId}`}>view</Link> </td>
+    <td>{props.policyNumber}</td><td>{props.insuranceType}</td><td>{props.claimStatus}</td><td>{props.customerName}</td><td>{props.startedDate}</td>
     <td>{props.amount}</td><td>{props.reason}</td><td>{props.description}</td></tr>
 }
 

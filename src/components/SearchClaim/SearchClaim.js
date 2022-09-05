@@ -9,6 +9,11 @@ const SearchClaim = (props) => {
     const [claims, setClaims] = useState([]);
 
     const claimTableColumns = [{
+        Header: "Claim Id",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "claimId",
+        filterable: true
+    },{
         Header: "Policy Number",
         headerStyle: {backgroundColor: "#17a2b8", color: "black"},
         accessor: "policyNumber",
@@ -17,6 +22,11 @@ const SearchClaim = (props) => {
         Header: "Insurance Type",
         headerStyle: {backgroundColor: "#17a2b8", color: "black"},
         accessor: "insuranceType",
+        filterable: true
+    },{
+        Header: "Status",
+        headerStyle: {backgroundColor: "#17a2b8", color: "black"},
+        accessor: "claimStatus",
         filterable: true
     },{
         Header: "Customer Name",

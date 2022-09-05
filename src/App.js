@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Navigation from './components/Navigation/Navigation';
 import NewClaim from './components/NewClaim/NewClaim';
 import SearchClaim from './components/SearchClaim/SearchClaim';
+import ViewClaim from './components/ViewClaim/ViewClaim';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/new" element={<NewClaim />} />
           <Route path="/find" element = {<SearchClaim />} />
+          <Route path="/view/:id" element = {<ViewClaim />} />
         </Routes>
       </div>
     </BrowserRouter>
