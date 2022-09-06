@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import ClaimRow from "./ClaimRow";
 import ReactTable from "react-table-6";
 import 'react-table-6/react-table.css'
+import {Link} from 'react-router-dom'
 
 const SearchClaim = (props) => {
     const [claims, setClaims] = useState([]);
@@ -98,11 +99,19 @@ const SearchClaim = (props) => {
         getDataFromServer();
     } , [] );
 
-    const displayClaims = claims
-        .map ( claims => 
-        <ClaimRow key={claims.policyNumber} policyNumber={claims.policyNumber} insuranceType ={claims.insuranceType} country={claims.country} 
-            customerName={claims.customerName} startedDate={claims.startedDate} amount={claims.amount} reason={claims.reason} description={claims.description} />
-      );
+    // const displayClaims = claims
+    //     .map ( claims => 
+    //     <ClaimRow key={claims.policyNumber} policyNumber={claims.policyNumber} insuranceType ={claims.insuranceType} country={claims.country} 
+    //         customerName={claims.customerName} startedDate={claims.startedDate} amount={claims.amount} reason={claims.reason} description={claims.description} />
+    //   );
+
+    const displayClaims2 = claims.map (c => {
+        const claimId = c.claimId;
+        c.claimId = <Link to={`/view/${claimId}`}>{claimId}</Link>
+        return c;
+    });
+
+    //console.log(displayClaims2);
 
     return <div>
             <ReactTable

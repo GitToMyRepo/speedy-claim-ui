@@ -1,5 +1,11 @@
 import axios from "axios";
 
+
+const basicAuthHeader = (username, password) => {
+    console.log(btoa(`${username}:${password}`));
+    return {'Authorization' : 'Basic ' + btoa(`${username}:${password}`)}
+}
+
 export const addNewClaim = (claim) =>  {
     return axios({ url : "http://localhost:8080/api/addclaim/", 
     method : "POST", 
@@ -27,4 +33,13 @@ export const getClaim = (claimId) => {
         {url : `http://localhost:8080/api/claim/${claimId}`,
         method: "GET",
         headers : {'Accept': 'application/json'}} )
+}
+
+export const login = (username, password) => {
+    return axios(
+        {url : "http://localhost:8080/api/login",
+        method: "POST",
+        headers : { ...basicAuthHeader(username,password) , 'Accept': 'application/json', 'Content-Type' : 'application/json' },
+        data : {"username" : username}
+    }) ;
 }

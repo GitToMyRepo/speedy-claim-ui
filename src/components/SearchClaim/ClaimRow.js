@@ -8,10 +8,9 @@ const ClaimRow = (props) => {
         navigate(`/view/${props.id}`);
     }
 
-    return <tr id={props.cliamId} ><td>
-        <button onClick={handleClick}>{props.claimId}</button>
-        <Link to={`/view/${props.claimId}`}>view</Link> </td>
-    <td>{props.policyNumber}</td><td>{props.insuranceType}</td><td>{props.claimStatus}</td><td>{props.customerName}</td><td>{props.startedDate}</td>
+    console.log("view claim");
+
+    return <tr id={props.key} ><td>{props.policyNumber}</td><td>{props.insuranceType}</td><td>{props.claimStatus}</td><td>{props.customerName}</td><td>{props.startedDate}</td>
     <td>{props.amount}</td><td>{props.reason}</td><td>{props.description}</td></tr>
 }
 
