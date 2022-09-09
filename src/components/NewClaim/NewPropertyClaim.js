@@ -1,13 +1,14 @@
 import { useReducer, useState } from "react";
-import { addNewClaim } from "../../data/DataFunctions";
+import { useSelector } from "react-redux";
+import { addNewClaim, addNewPropertyClaim } from "../../data/DataFunctions";
 import ClaimForm from "../Forms/ClaimForm";
 import LoginForm from "../Forms/LoginForm";
 
-const NewClaim = () => {
+const NewPropertyClaim = () => {
 
     const emptyClaim = {
         policyNumber: "", insuranceType: "", startedDate: new Date().toISOString().slice(0, 10), customerName: "",
-        amount: "", reason: "", description: ""
+        amount: "", reason: "", description: "", address: ""
     }
 
     const newClaimReducer = (state, data) => {
@@ -25,16 +26,18 @@ const NewClaim = () => {
         dispatch(dataToChange);
     }
 
-    const {policyNumber, insuranceType, startedDate, customerName, amount, reason, description} = newClaim;
+    const {policyNumber, insuranceType, startedDate, customerName, amount, reason, description, address} = newClaim;
     
     const [message, setMessage] = useState("")
     const [saving, setSaving] = useState(false);
+
+    const user = useSelector(state => state.user);
 
     const submitForm = (e) => {
         e.preventDefault();
         setSaving(true);
         setMessage("please wait saving")
-        const response = addNewClaim(newClaim);
+        const response = addNewPropertyClaim(user.username, user.password, newClaim);
         response.then(result => {
             if (result.status === 200) {
                 setMessage("Payment added with id " + result.data.id)
@@ -75,10 +78,13 @@ const NewClaim = () => {
            <label htmlFor="description">Description</label>
            <input type="text" id="description" onChange={handleChange} value={description} />
            <br />
+           <label htmlFor="description">Address</label>
+           <input type="text" id="address" onChange={handleChange} value={address} />
+           <br />
            <button disabled={saving} type="submit">Submit Claim</button>
            <p>{message}</p>
        </form>
     );
 }
 
-export default NewClaim;
+export default NewPropertyClaim;

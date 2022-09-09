@@ -5,6 +5,7 @@ import ClaimRow from "./ClaimRow";
 import ReactTable from "react-table-6";
 import 'react-table-6/react-table.css'
 import {Link} from 'react-router-dom'
+import { useSelector } from "react-redux";
 
 const SearchClaim = (props) => {
     const [claims, setClaims] = useState([]);
@@ -60,6 +61,8 @@ const SearchClaim = (props) => {
     // const claimsInRedux = useSelector(state => state.claims);
     // const lastFetchInRedux = useSelector(state => state.lastFetch);
 
+    const user = useSelector(state => state.user);
+
     const getDataFromServer = () => {
         // let timeDifference = 999999;
         // if (claimsInRedux.length > 0) {
@@ -73,7 +76,7 @@ const SearchClaim = (props) => {
         //     setClaims(claimsInRedux);
         //     console.log("got the claims from redux");
         // }
-        const claimsPromise = getAllClaimsAxiosVersion();
+        const claimsPromise = getAllClaimsAxiosVersion(user.username, user.password);
         //getTestData();
         console.log("getting the claims from redux");
         claimsPromise.then (
@@ -111,11 +114,19 @@ const SearchClaim = (props) => {
         return c;
     });
 
+    const displayClaims3 = claims.map (c => {
+        const claimId = c.claimId;
+        const insuranceType = c.insuranceType;
+        console.log(insuranceType);
+        c.claimId = <Link to={`/view/${insuranceType}/${claimId}`}>{claimId}</Link>
+        return c;
+    });
+
     //console.log(displayClaims2);
 
     return <div>
             <ReactTable
-            data = {claims}
+            data = {displayClaims3}
             columns = {claimTableColumns}
             defaultPageSize = {3}
             noDataText = {"No Claim found"}

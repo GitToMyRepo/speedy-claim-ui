@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getClaim } from "../../data/DataFunctions";
 
-const ViewClaim= (props) => {
+const ViewPetClaim= (props) => {
 
     const emptyClaim= { claimId: "", policyNumber: "", insuranceType: "", claimStatus: "", customerStatus: "", startedDate : new Date().toISOString().slice(0,10) , 
-        amount : "", reason: "", desription : ""}
+    amount : "", reason: "", desription : "", type : "", breed: ""}
 
     const [claim, setClaim] = useState(emptyClaim);
     const user = useSelector(state => state.user);
@@ -26,15 +26,15 @@ const ViewClaim= (props) => {
         .catch( error => console.log("error occurred", error)) ;
     }, [] );
     
-    // const showEditButton = () => {
-    //     console.log("show edit button: ");
-    //     //if (allowedRoles.includes(user.role)) {
-    //         return (user.role === "MANAGER" &&    
-    //         <button onClick={editclaim}>Edit</button>)// </p>)
-    //     // } else {
-    //     //     console.log("do nothing");
-    //     // }
-    // }
+    const showEditButton = () => {
+        console.log("show edit button: ");
+        //if (allowedRoles.includes(user.role)) {
+            return (user.role === "MANAGER" &&    
+            <button onClick={editClaim}>Edit</button>)// </p>)
+        // } else {
+        //     console.log("do nothing");
+        // }
+    }
 
     const navigate = useNavigate();
 
@@ -59,11 +59,13 @@ const ViewClaim= (props) => {
                     <tr><th>Amount</th><td>{claim.amount}</td></tr>
                     <tr><th>Reason</th><td>{claim.reason}</td></tr>
                     <tr><th>Description</th><td>{claim.description}</td></tr>
+                    <tr><th>Type</th><td>{claim.type}</td></tr>
+                    <tr><th>Breed</th><td>{claim.breed}</td></tr>
                 </tbody>
             </table>
-            {/* {showEditButton()} */}
+            {showEditButton()} 
         </Fragment>
     );
 }
 
-export default ViewClaim;
+export default ViewPetClaim;

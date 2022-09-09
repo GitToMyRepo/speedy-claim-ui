@@ -6,17 +6,31 @@ const basicAuthHeader = (username, password) => {
     return {'Authorization' : 'Basic ' + btoa(`${username}:${password}`)}
 }
 
-export const addNewClaim = (claim) =>  {
-    return axios({ url : "http://localhost:8080/api/addclaim/", 
+export const addNewMotorClaim = (username, password, claim) =>  {
+    return axios({ url : "http://localhost:8080/api/claim/motor", 
     method : "POST", 
-    headers : { 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
+    headers : {...basicAuthHeader(username, password), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
     data : claim } );
 }
 
-export const getAllClaimsAxiosVersion = () => {
+export const addNewPropertyClaim = (username, password, claim) =>  {
+    return axios({ url : "http://localhost:8080/api/claim/property", 
+    method : "POST", 
+    headers : {...basicAuthHeader(username, password), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
+    data : claim } );
+}
+
+export const addNewPetClaim = (username, password, claim) =>  {
+    return axios({ url : "http://localhost:8080/api/claim/pet", 
+    method : "POST", 
+    headers : {...basicAuthHeader(username, password), 'Accept': 'application/json', 'Content-Type' : 'application/json' } , 
+    data : claim } );
+}
+
+export const getAllClaimsAxiosVersion = (username, password) => {
     
     const claimsPromise = axios({ url :"http://localhost:8080/api/claim/",
-         method: "GET", headers: { 'Accept': 'application/json' } });
+         method: "GET", headers: {...basicAuthHeader(username, password),  'Accept': 'application/json' } });
         
     return claimsPromise;
 }
@@ -28,11 +42,11 @@ export const getTestData= () => {
     ]})
 }
 
-export const getClaim = (claimId) => {
+export const getClaim = (username, password, claimId) => {
     return axios(
         {url : `http://localhost:8080/api/claim/${claimId}`,
         method: "GET",
-        headers : {'Accept': 'application/json'}} )
+        headers : {...basicAuthHeader(username, password), 'Accept': 'application/json'}} )
 }
 
 export const login = (username, password) => {
